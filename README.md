@@ -19,7 +19,7 @@ With one argument:
 
 ```swift
 var counter = 0
-var event   = Event<Int>()
+var event   = EventWith<Int>()
 event.on() {
   counter += $0
 }
