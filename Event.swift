@@ -40,7 +40,16 @@ public struct Event {
     public mutating func once(callback: Listener.F) {
         listeners.append(Listener(callback: callback, once: true))
     }
-
+    
+    public mutating func off() {
+        listeners.removeAll()
+    }
+    
+    public mutating func only(callback: Listener.F) {
+        listeners.removeAll()
+        listeners.append(Listener(callback: callback, once: true))
+    }
+    
     public mutating func emit() {
         self.listeners = listeners.filter { (listener) in
             listener.callback()
@@ -67,7 +76,16 @@ public struct EventWith<P1> {
     public mutating func once(callback: ListenerWith<P1>.F) {
         listeners.append(ListenerWith(callback: callback, once: true))
     }
-
+    
+    public mutating func off() {
+        listeners.removeAll()
+    }
+    
+    public mutating func only(callback: ListenerWith<P1>.F) {
+        listeners.removeAll()
+        listeners.append(ListenerWith(callback: callback, once: true))
+    }
+    
     public mutating func emitWith(p1: P1) {
         self.listeners = listeners.filter { (listener) in
             listener.callback(p1)
@@ -94,7 +112,16 @@ public struct EventDue<P1, P2> {
     public mutating func once(callback: ListenerDue<P1, P2>.F) {
         listeners.append(ListenerDue(callback: callback, once: true))
     }
+    
+    public mutating func off() {
+        listeners.removeAll()
+    }
 
+    public mutating func only(callback: ListenerDue<P1, P2>.F) {
+        listeners.removeAll()
+        listeners.append(ListenerDue(callback: callback, once: true))
+    }
+    
     public mutating func emitWith(p1: P1, and p2: P2) {
         self.listeners = listeners.filter { (listener) in
             listener.callback(p1, p2)

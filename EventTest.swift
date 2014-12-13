@@ -22,7 +22,7 @@
 
 import UIKit
 import XCTest
-import SwiftEvents
+import SwiftEvent
 
 class EventTest: XCTestCase {
 
